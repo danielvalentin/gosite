@@ -1,0 +1,44 @@
+{{set . "title" .content.Title}}
+{{template "header.html" .}}
+
+<header class="hero-unit" style="background-color:#A9F16C">
+	<div class="container">
+		<div class="row">
+			<div class="hero-text">
+				<h1>{{.content.Title}}</h1>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<a href="{{url "Content.Index"}}" class="btn">&laquo; Back</a>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="span12">
+			<p>{{.content.Guid}}</p>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="span12">
+			{{range .content.Blocks}}
+				{{.Render}}
+			{{end}}
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="span6">
+			{{template "flash.html" .}}
+		</div>
+	</div>
+</div>
+
+{{template "footer.html" .}}

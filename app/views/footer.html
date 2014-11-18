@@ -1,0 +1,10 @@
+
+		<script src="/media/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		{{range .moreScripts}}
+			<script src="/media/{{.}}" type="text/javascript" charset="utf-8"></script>
+		{{end}}
+		{{if eq .RunMode "dev"}}
+			{{template "debug.html" .}}
+		{{end}}
+	</body>
+</html>
