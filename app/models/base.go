@@ -1,26 +1,20 @@
 package models
 
 import (
+	_ "github.com/go-sql-driver/mysql"
 	"database/sql"
 	"github.com/coopernurse/gorp"
-	_ "github.com/go-sql-driver/mysql"
 )
 
-type Base struct {
-	
-}
-
-func (base *Base) InitDb() *gorp.DbMap {
-	
-	db, err := sql.Open("mysql", "root:daniel2912@/cmstest")
-	
+func getDB() *gorp.DbMap {
+	conn, err := sql.Open("mysql", "root:daniel2912@/godb")
 	if err != nil {
-		panic("Error opening DB connection. Err")
-		return nil
+		panic("cant connect to db")
 	}
 	
-	dbmap := &gorp.DbMap{Db:db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF-8"}}
+	dbmap := &gorp.DbMap{Db: conn, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
+	
+	dbmap.AddTableWithName(User{}, "users").SetKeys(true, "Id")
 	
 	return dbmap
-	
 }

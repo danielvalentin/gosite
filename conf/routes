@@ -6,6 +6,13 @@ module:testrunner
 
 GET		/						Content.Index
 
+# User stuff
+GET		/user					User.Index
+GET		/user/login				User.Login
+POST	/user/login				User.DoLogin
+GET		/user/register			User.Register
+POST	/user/register			User.DoUserRegistration
+
 # Ignore favicon requests
 GET		/favicon.ico			404
 

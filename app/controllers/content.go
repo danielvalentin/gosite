@@ -11,9 +11,7 @@ type Content struct{
 }
 
 func (c Content) Index () revel.Result {
-	
 	contents := new(models.Content).GetAll()
-	
 	return c.Render(contents)
 }
 

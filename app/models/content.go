@@ -1,11 +1,6 @@
 package models
 
-import (
-	"fmt"
-)
-
 type Content struct {
-	Base
 	Id						int64
 	User_id					int64
 	Contenttype_id			int64
@@ -34,40 +29,29 @@ type Content struct {
 	Blocks					[]Block
 }
 
-
-func (content *Content) GetAll() []Content {
-	
-	dbmap := content.InitDb()
-	defer dbmap.Db.Close()
+func (content Content) GetAll() []Content {
+	conn := getDB()
+	defer conn.Db.Close()
 	
 	var contents []Content
-	_, err := dbmap.Select(&contents, "SELECT * FROM contents")
-	
+	_, err := conn.Select(&contents, "SELECT * FROM `contents`")
 	if err != nil {
-		fmt.Printf("Error selecting. Err: %s",err.Error())
-		panic("Argh")
-		return nil
+		panic(err.Error())
 	}
 	
 	return contents
 	
 }
 
-func (content *Content) GetByGuid(slug string) Content {
-	
-	dbmap := content.InitDb()
-	defer dbmap.Db.Close()
-	
+func (content Content) GetByGuid(slug string) Content {
+	conn := getDB()
+	defer conn.Db.Close()
 	var cont Content
-	err := dbmap.SelectOne(&cont, "SELECT * FROM contents WHERE `guid` = ?", slug)
-	
+	err := conn.SelectOne(&cont, "SELECT * FROM contents WHERE `guid` = ?", slug)
 	if err != nil {
-		fmt.Printf("Error in GetBySlug: SelectOne contents. Err: %s",err.Error())
-		panic("Argh")
+		panic(err.Error())
 	}
-	
 	cont.Blocks = new(Block).GetByContentID(cont.Id)
-	
 	return cont
-	
 }
+
