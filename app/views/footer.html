@@ -1,10 +1,13 @@
-
-		<script src="/media/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
-		{{range .moreScripts}}
+		
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.9.0-beta.4/ember.min.js"></script>
+		<script src="/media/js/app.js"></script>
+		[[range .moreScripts]]
 			<script src="/media/{{.}}" type="text/javascript" charset="utf-8"></script>
-		{{end}}
-		{{if eq .RunMode "dev"}}
-			{{template "debug.html" .}}
-		{{end}}
+		[[end]]
+		[[if eq .RunMode "dev"]]
+			[[template "debug.html" .]]
+		[[end]]
 	</body>
 </html>

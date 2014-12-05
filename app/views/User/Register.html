@@ -1,47 +1,37 @@
-{{set . "title" "User"}}
-{{template "header.html" .}}
-
-<header class="hero-unit" style="background-color:#A9F16C">
-	<div class="container">
-		<div class="row">
-			<div class="hero-text">
-				<h1>User registration</h1>
-			</div>
-		</div>
-	</div>
-</header>
+[[set . "title" "User"]]
+[[template "header.html" .]]
 
 <div class="container">
 	<div class="row">
 		<div class="span6">
-			{{template "flash.html" .}}
+			[[template "flash.html" .]]
 		</div>
 	</div>
 </div>
 
 <section class="container">
 	<form action="/user/register" method="post">
-		{{with $field := field "email" .}}
-			<div class="form-group {{$field.ErrorClass}}">
+		[[with $field := field "email" .]]
+			<div class="form-group [[$field.ErrorClass]]">
 				<label>Email</label>
-				<input type="email" size="10" name="{{$field.Name}}" class="" value="{{$field.Flash}}">
-				<span class="error">{{$field.Error}}</span>
+				<input type="email" size="10" name="[[$field.Name]]" class="" value="[[$field.Flash]]">
+				<span class="error">[[$field.Error]]</span>
 			</div>
-		{{end}}
-		{{with $field := field "username" .}}
-			<div class="form-group {{$field.ErrorClass}}">
+		[[end]]
+		[[with $field := field "username" .]]
+			<div class="form-group [[$field.ErrorClass]]">
 				<label>Username</label>
-				<input type="email" size="10" name="{{$field.Name}}" class="" value="{{$field.Flash}}">
-				<span class="error">{{$field.Error}}</span>
+				<input type="email" size="10" name="[[$field.Name]]" class="" value="[[$field.Flash]]">
+				<span class="error">[[$field.Error]]</span>
 			</div>
-		{{end}}
-		{{with $field := field "password" .}}
-			<div class="form-group {{$field.ErrorClass}}">
+		[[end]]
+		[[with $field := field "password" .]]
+			<div class="form-group [[$field.ErrorClass]]">
 				<label>Password</label>
-				<input type="password" size="10" name="{{$field.Name}}" class="" value="">
-				<span class="error">{{$field.Error}}</span>
+				<input type="password" size="10" name="[[$field.Name]]" class="" value="">
+				<span class="error">[[$field.Error]]</span>
 			</div>
-		{{end}}
+		[[end]]
 		<div class="form-group">
 			<button class="btn">Register</button>
 		</div>
@@ -49,4 +39,4 @@
 	</form>
 </section>
 
-{{template "footer.html" .}}
+[[template "footer.html" .]]

@@ -11,8 +11,8 @@ type Content struct{
 }
 
 func (c Content) Index () revel.Result {
-	contents := new(models.Content).GetAll()
-	return c.Render(contents)
+	active := "content"
+	return c.Render(active)
 }
 
 func (c Content) getSlug () string {
@@ -23,9 +23,7 @@ func (c Content) getSlug () string {
 }
 
 func (c Content) Find () revel.Result {
-	
 	slug := c.getSlug()
 	content := new(models.Content).GetByGuid(slug)
-	
 	return c.Render(slug, content)
 }

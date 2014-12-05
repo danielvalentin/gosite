@@ -17,7 +17,7 @@ type User struct {
 	Created					int64
 }
 
-func (u User) IsLogged() bool {
+func (u User) LoggedIn() bool {
 	return false
 }
 
@@ -68,5 +68,23 @@ func (u User) CheckCredentials(username, password string, v *revel.Validation) b
 		return false
 	}
 	return true
+}
+
+func GetUserByUsername(username string) *User {
+	conn := getDB();
+	defer conn.Db.Close()
 	
+	var query string
+	if strings.Contains(username, "@") {
+		query = "SELECT * FROM `users` WHERE `email` = ?"
+	} else {
+		query = "SELECT * FROM `users` WHERE `username` = ?"
+	}
+	
+	var user *User
+	err := conn.SelectOne(&user, query, username)
+	if err != nil {
+		panic(err.Error())
+	}
+	return user
 }

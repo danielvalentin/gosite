@@ -49,6 +49,7 @@ func (content Content) GetByGuid(slug string) Content {
 	var cont Content
 	err := conn.SelectOne(&cont, "SELECT * FROM contents WHERE `guid` = ?", slug)
 	if err != nil {
+		print("Slug was: "+slug)
 		panic(err.Error())
 	}
 	cont.Blocks = new(Block).GetByContentID(cont.Id)

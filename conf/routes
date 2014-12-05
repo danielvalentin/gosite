@@ -12,6 +12,10 @@ GET		/user/login				User.Login
 POST	/user/login				User.DoLogin
 GET		/user/register			User.Register
 POST	/user/register			User.DoUserRegistration
+GET		/user/logout			User.Logout
+
+# CMS
+GET /cms						Cms.Index
 
 # Ignore favicon requests
 GET		/favicon.ico			404
